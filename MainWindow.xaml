@@ -1,0 +1,70 @@
+﻿<Window x:Class="Kareem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kareem"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <local:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+    </Window.Resources>
+    <Grid>
+        <Button x:Name="Fetch" Content="Fetch Reviews" HorizontalAlignment="Left" Margin="323,189,0,0" VerticalAlignment="Top" Height="28" Width="77" Click="Button_Click" RenderTransformOrigin="0.613,-0.13"/>
+        <TextBox x:Name="AppIdTextBox" HorizontalAlignment="Left" Margin="323,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162" Height="26" />
+        <Label x:Name="Lab" Content="" HorizontalAlignment="Left" Margin="326,222,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="Stop" Visibility="Hidden" Content="Stop" HorizontalAlignment="Left" Margin="405,189,0,0" VerticalAlignment="Top" Height="28" Width="77" Click="Cancel_Click" RenderTransformOrigin="0.613,-0.13"/>
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="243,134,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.438,0.549"/>
+        <TextBox HorizontalAlignment="Left" Text="{Binding Path=Max, Mode=TwoWay}" Height="27" Margin="323,102,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="162"/>
+        <Label Content="Max Reviews:" HorizontalAlignment="Left" Margin="243,98,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="Export" Click="Export_Click" Visibility="Hidden" Content="Export" HorizontalAlignment="Left" Height="28" Margin="408,189,0,0" VerticalAlignment="Top" Width="77" RenderTransformOrigin="0.494,-0.766"/>
+        <Border Margin="660,98,33,209" Padding="5" BorderThickness="1" BorderBrush="Black">
+            <StackPanel>
+                <Label Content="Reviews:" Margin="-5 0 0 0"/>
+                <RadioButton 
+            GroupName="Reviews" 
+            IsChecked="{Binding Filter, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=All}"  
+            Content="All" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"/>
+                <RadioButton 
+            GroupName="Reviews" 
+            IsChecked="{Binding Filter, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Positive}"  
+            Content="Positive" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"/>
+                <RadioButton 
+            GroupName="Reviews" 
+            IsChecked="{Binding Filter, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Negative}"  
+            Content="Negative" 
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top"/>
+            </StackPanel>
+        </Border>
+        <Border Margin="534,98,159,209" Padding="5" BorderThickness="1" BorderBrush="Black">
+            <StackPanel Height="115" VerticalAlignment="Top">
+                <Label Content="Purchase Type:" Margin="-5 0 0 0" />
+                <RadioButton 
+        GroupName="PurchaseType" 
+        IsChecked="{Binding PurchaseType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=All}" 
+        Content="All" 
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Top"/>
+                <RadioButton 
+        GroupName="PurchaseType" 
+        IsChecked="{Binding PurchaseType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Steam}" 
+        Content="Steam" 
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Top"/>
+                <RadioButton 
+        GroupName="PurchaseType" 
+        IsChecked="{Binding PurchaseType, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Non_Steam_Purchase}" 
+        Content="Non-Steam Purchase" 
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Top"/>
+            </StackPanel>
+        </Border>
+        <ListBox ItemsSource="{Binding Languages}" SelectionMode="Multiple" DisplayMemberPath="Key" Name="LanguagesListBox" Margin="534,261,33,18" />
+
+    </Grid>
+</Window>
